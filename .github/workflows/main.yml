@@ -1,7 +1,7 @@
 on: 
   push:
     branchs:
-      - dev
+      - master
 name: 🚀 Deploy website on push
 jobs:
   web-deploy:
@@ -16,5 +16,5 @@ jobs:
       with:
         server: ${{secrets.ftp_host}}
         username: ${{secrets.ftp_user}}
-        password: ${{ secrets.ftp_password}}
-        server-dir: ./FlumeWeb/
+        password: ${{secrets.ftp_password}}
+        server-dir: ./FlumeWeb
