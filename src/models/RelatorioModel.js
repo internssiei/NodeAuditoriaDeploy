@@ -9,14 +9,15 @@ const getAll = async ()=>{
 };
 
 const createRelatorio = async (relatorio)=>{
-    const date = new Date(Date.now());
-    const { evidencia, local, disciplina, descricao } = relatorio;
-    const query = 'INSERT INTO `AUDITORIA_TESTE`(create_time, evidencia, local, disciplina, descricao) VALUES(?,?,?,?,?)';
-    const [createdRelatorio] = connection.execute(query,[date.toUTCString(), evidencia, local, disciplina, descricao,'pendente','']);
+    const {evidencia, local} = relatorio;
+    
+    const dateUTC = new Date(Date.now()).toUTCString();
+    const query = 'INSERT INTO AUDITORIA_TESTE(create_time, evidencia, local, disciplina, descricao, situacao, resposta) VALUES(?, ?, ?, ?, ?, ?, ?)';
+    const [createdRelatorio] = await connection.execute(query, [dateUTC, evidencia, local, 'disciplina', 'descricao','pendente','a']);
     return createdRelatorio;
 };
 
 module.exports={
 getAll,
-createRelatorio
+createRelatorio,
 };
